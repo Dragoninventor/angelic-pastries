@@ -1,0 +1,52 @@
+name: angelic-pastries
+
+services:
+    website:
+        build:
+            context: .
+            dockerfile: apps/website/Dockerfile
+        image: ${WEBSITE_IMAGE:-ghcr.io/dragoninventor/angelic-pastries/website:latest}
+        restart: unless-stopped
+        environment:
+            - DATABASE_URL=${DATABASE_URL}
+            - PAYLOAD_SECRET=${PAYLOAD_SECRET}
+            - RUNPOD_ENDPOINT_ID=${RUNPOD_ENDPOINT_ID}
+            - RUNPOD_API_KEY=${RUNPOD_API_KEY}
+        volumes:
+            - payload-data:/app/apps/website/public
+        working_dir: /app
+        depends_on:
+            - db
+
+    db:
+        restart: always
+        image: mongo:latest
+        command:
+            - --storageEngine=wiredTiger
+        volumes:
+            - data:/data/db
+
+    caddy:
+        restart: unless-stopped
+        image: ${CADDY_IMAGE:-ghcr.io/dragoninventor/angelic-pastries/caddy:latest}
+        ports:
+            - "80:80"
+            - "443:443"
+            - "443:443/udp"
+        volumes:
+            - caddy_data:/data
+            - caddy_config:/config
+        depends_on:
+            - website
+        environment:
+            - DOMAIN=angelicpastries.com
+
+volumes:
+    data:
+        external: true
+    payload-data:
+        external: true
+    caddy_data:
+        name: "caddy_data"
+    caddy_config:
+        name: "caddy_config"
