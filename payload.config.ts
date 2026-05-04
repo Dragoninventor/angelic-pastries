@@ -1,12 +1,9 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import path from "path";
 import { Users } from "@/payload/collections/Users";
-import dotenv from "dotenv";
 import sharp from "sharp";
 import { Products } from "@/payload/collections/Products";
 import { buildConfig } from "payload";
-import { fileURLToPath } from "node:url";
 import { ecommercePlugin } from "@payloadcms/plugin-ecommerce";
 import { Media } from "@/payload/collections/Media";
 import { Addresses } from "@/payload/collections/Addresses";
@@ -26,17 +23,6 @@ import { VariantTypes } from "@/payload/collections/Variants/VariantTypes";
 import { VariantOptions } from "@/payload/collections/Variants/VariantOptions";
 import { stripeAdapter } from "@payloadcms/plugin-ecommerce/payments/stripe";
 import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-try {
-	dotenv.config({
-		path: path.resolve(__dirname, ".env"),
-	});
-} catch (error) {
-	console.error(error);
-}
 
 export default buildConfig({
 	admin: {
@@ -73,14 +59,13 @@ export default buildConfig({
 	secret: process.env.PAYLOAD_SECRET || "",
 	typescript: {},
 	db: mongooseAdapter({
-		url: process.env.DATABASE_URI || "",
+		url: process.env.DATABASE_URL || "",
 	}),
 	email: nodemailerAdapter({
-		defaultFromAddress:
-			process.env.EMAIL_FROM_ADDRESS || "admin@angelicpastries.com",
-		defaultFromName: process.env.EMAIL_FROM_NAME || "Angelic Pastries",
+		defaultFromAddress: process.env.EMAIL_FROM_ADDRESS!,
+		defaultFromName: process.env.EMAIL_FROM_NAME!,
 		transportOptions: {
-			host: process.env.SMTP_HOST || "admin@example.com",
+			host: process.env.SMTP_HOST,
 			port: Number(process.env.SMTP_PORT) || 587,
 			auth: {
 				user: process.env.SMTP_USER,

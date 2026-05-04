@@ -14,7 +14,7 @@ export const Orders: CollectionConfig = {
 		useAsTitle: "createdAt",
 		defaultColumns: ["createdAt", "orderedBy", "_status"],
 		preview: (doc) => {
-			return `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/orders/${doc.id}`;
+			return `${process.env.NEXT_PUBLIC_SERVER_URL}/orders/${doc.id}`;
 		},
 	},
 	hooks: {},

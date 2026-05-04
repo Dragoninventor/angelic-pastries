@@ -71,7 +71,7 @@ jobs:
                 uses: docker/build-push-action@v6.5.0
                 with:
                     context: .
-                    file: apps/website/Dockerfile
+                    file: Dockerfile
                     push: true
                     tags: ${{ steps.meta.outputs.tags }}
                     labels: ${{ steps.meta.outputs.labels }}
@@ -151,7 +151,7 @@ jobs:
                     DOTENV_PRIVATE_KEY_PRODUCTION: ${{ secrets.DOTENV_PRIVATE_KEY_WEBSITE_PRODUCTION }}
                 run: |
                     ssh root@${{ secrets.SSH_HOST }} "mkdir -p ${{ secrets.WORK_DIR }}"
-                    scp compose.yml apps/website/.env.production root@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}
+                    scp compose.yml .env.production root@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}
                     
                     ssh root@${{ secrets.SSH_HOST }} \
                     WEBSITE_IMAGE="$WEBSITE_IMAGE" \

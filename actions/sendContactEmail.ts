@@ -44,9 +44,9 @@ export async function sendContactEmail(
 		return { error: "Captcha verification failed." };
 	}
 
-	const name = formData.get("name") as string;
-	const email = formData.get("email") as string;
-	const message = formData.get("message") as string;
+	const name = formData.get("name");
+	const email = formData.get("email");
+	const message = formData.get("message");
 
 	if (!name || !email || !message) {
 		return { error: "Please fill out all fields." };
