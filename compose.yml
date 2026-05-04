@@ -5,6 +5,8 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+            args:
+                - NEXT_SERVER_ACTIONS_ENCRYPTION_KEY=${NEXT_SERVER_ACTIONS_ENCRYPTION_KEY}
         image: ${WEBSITE_IMAGE:-ghcr.io/dragoninventor/angelic-pastries/website:latest}
         restart: unless-stopped
         environment:
