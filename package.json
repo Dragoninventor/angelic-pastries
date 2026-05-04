@@ -4,6 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
+		"payload": "cross-env PAYLOAD_CONFIG_PATH=payload.config.ts payload",
 		"dotenvx": "dotenvx",
 		"dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
 		"build": "cross-env NODE_OPTIONS=--no-deprecation NODE_OPTIONS=--no-deprecation SKIP_YARN_COREPACK_CHECK=0 dotenvx run -f .env.production -- next build --experimental-build-mode compile",

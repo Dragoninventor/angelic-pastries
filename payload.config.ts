@@ -23,6 +23,7 @@ import { VariantTypes } from "@/payload/collections/Variants/VariantTypes";
 import { VariantOptions } from "@/payload/collections/Variants/VariantOptions";
 import { stripeAdapter } from "@payloadcms/plugin-ecommerce/payments/stripe";
 import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
+import { migrations } from "@/migrations";
 
 export default buildConfig({
 	admin: {
@@ -60,6 +61,8 @@ export default buildConfig({
 	typescript: {},
 	db: mongooseAdapter({
 		url: process.env.DATABASE_URL || "",
+		migrationDir: "./migrations",
+		prodMigrations: migrations,
 	}),
 	email: nodemailerAdapter({
 		defaultFromAddress: process.env.EMAIL_FROM_ADDRESS!,
