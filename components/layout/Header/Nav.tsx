@@ -6,9 +6,8 @@ import { Cart } from "@/components/cart";
 import { Hamburger } from "./Hamburger";
 import { cn } from "@/utils/cn";
 
-const Nav = () => {
+const Nav = ({ authenticated = false }: { authenticated?: boolean }) => {
 	const [open, setOpen] = useState(false);
-	const authenticated = true;
 
 	return (
 		<>

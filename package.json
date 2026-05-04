@@ -6,8 +6,8 @@
 	"scripts": {
 		"dotenvx": "dotenvx",
 		"dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
-		"build": "SKIP_YARN_COREPACK_CHECK=0 dotenvx run -f .env.production -- next build --experimental-build-mode compile",
-		"start": "next start",
+		"build": "cross-env NODE_OPTIONS=--no-deprecation NODE_OPTIONS=--no-deprecation SKIP_YARN_COREPACK_CHECK=0 dotenvx run -f .env.production -- next build --experimental-build-mode compile",
+		"start": "cross-env NODE_OPTIONS=--no-deprecation next start",
 		"generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
 		"generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
 		"lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",

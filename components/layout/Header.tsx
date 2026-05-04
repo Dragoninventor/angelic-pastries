@@ -1,7 +1,17 @@
 import Logo from "./Header/Logo";
 import Nav from "./Header/Nav";
+import { headers } from "next/headers";
+import { getPayload } from "payload";
+import configPromise from "@payload-config";
 
-const SiteHeader = () => {
+const SiteHeader = async () => {
+	const headersList = await headers();
+	const payload = await getPayload({
+		config: configPromise,
+	});
+
+	const { user } = await payload.auth({ headers: headersList });
+
 	return (
 		<header
 			className={
@@ -9,7 +19,7 @@ const SiteHeader = () => {
 			}
 		>
 			<Logo />
-			<Nav />
+			<Nav authenticated={Boolean(user)} />
 		</header>
 	);
 };
