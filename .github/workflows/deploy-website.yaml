@@ -12,6 +12,7 @@ on:
             - public/**
             - styles/**
             - utils/**
+            - .env.production
             - .github/workflows/deploy-website.yaml
             - compose.yml
             - package.json
