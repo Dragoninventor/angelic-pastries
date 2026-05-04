@@ -54,6 +54,7 @@ export default buildConfig({
 			],
 		},
 	},
+	serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
 	collections: [Users, Media, Discounts],
 	globals: [Homepage, Business, Delivery],
 	editor: lexicalEditor({}),
@@ -76,7 +77,6 @@ export default buildConfig({
 				pass: process.env.SMTP_TOKEN,
 			},
 			secure: false,
-			logger: true,
 			tls: {
 				rejectUnauthorized: false,
 			},
