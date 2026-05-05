@@ -111,7 +111,7 @@ export const OrderItem: FC<OrderItemProps> = ({
 					<div className={styles.orderColumn}>
 						{order.notes && (
 							<p className={styles.orderNotes}>
-								<SquarePen size={14} />
+								<SquarePen size={14} className={styles.icon} />
 								<span>{order.notes}</span>
 							</p>
 						)}
