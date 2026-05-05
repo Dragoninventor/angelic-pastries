@@ -5,8 +5,6 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-            args:
-                - NEXT_SERVER_ACTIONS_ENCRYPTION_KEY=${NEXT_SERVER_ACTIONS_ENCRYPTION_KEY}
         image: ${WEBSITE_IMAGE:-ghcr.io/dragoninventor/angelic-pastries/website:latest}
         restart: unless-stopped
         environment:
@@ -15,7 +13,6 @@ services:
             - PAYLOAD_SECRET=${PAYLOAD_SECRET}
             - NEXT_PUBLIC_BUSINESS_NAME=${NEXT_PUBLIC_BUSINESS_NAME}
             - NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL}
-            - NEXT_SERVER_ACTIONS_ENCRYPTION_KEY=${NEXT_SERVER_ACTIONS_ENCRYPTION_KEY}
 
             # Stripe
             - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
