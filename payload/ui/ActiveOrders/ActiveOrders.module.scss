@@ -65,7 +65,7 @@
 			display: flex;
 			flex-direction: column;
 			border-radius: var(--style-radius-s);
-			border-left: 2px solid var(--theme-elevation-700);
+			//border-left: 2px solid var(--theme-elevation-700);
 			background-color: var(--theme-elevation-50);
 			padding: 0.5rem;
 
@@ -79,9 +79,18 @@
 				background-color: var(--theme-elevation-50);
 				transition: background-color 0.2s ease;
 				cursor: pointer;
+				text-decoration: none;
 
 				&:hover {
 					background-color: var(--theme-elevation-100);
+
+					.orderSummary {
+						.orderColumn {
+							.orderNotes {
+								//background-color: var(--theme-elevation-150);
+							}
+						}
+					}
 				}
 
 				.orderHeader {
@@ -89,12 +98,12 @@
 					width: 100%;
 					justify-content: space-between;
 					align-items: start;
-					margin-bottom: 0.5rem;
+					margin-bottom: 1rem;
 
 					.info {
 						display: flex;
 						flex-direction: column;
-						line-height: 1.5;
+						line-height: 1.4;
 						align-self: center;
 
 						.orderDate {
@@ -104,9 +113,10 @@
 						}
 
 						.customerEmail {
-							font-size: 0.875rem;
+							font-size: 1rem;
 							color: var(--theme-elevation-800);
 							text-decoration: underline;
+							//font-style: italic;
 						}
 					}
 
@@ -143,17 +153,38 @@
 					width: 100%;
 					height: 100%;
 					text-decoration: none;
+					gap: 1rem;
 
-					.orderItemsList {
-						font-size: 1rem;
-						color: var(--theme-elevation-700);
-						text-overflow: ellipsis;
-						padding: 0;
-						list-style-position: inside;
-						list-style-type: disc;
+					.orderColumn {
+						display: flex;
+						flex-direction: column;
 						width: 100%;
 
-						.orderItem {
+						.orderNotes {
+							display: inline-flex;
+							width: fit-content;
+							font-size: 0.875rem;
+							gap: 0.5em;
+							align-items: center;
+							color: var(--theme-elevation-700);
+							margin-bottom: 0.5rem;
+							padding: 0.5rem 0.75rem;
+							border: 1px solid var(--theme-elevation-200);
+							border-radius: var(--style-radius-s);
+							transition: background-color 0.2s ease;
+						}
+
+						.orderItemsList {
+							font-size: 0.875rem;
+							color: var(--theme-elevation-700);
+							text-overflow: ellipsis;
+							padding: 0;
+							list-style-position: inside;
+							list-style-type: disc;
+							width: 100%;
+
+							.orderItem {
+							}
 						}
 					}
 
@@ -164,43 +195,6 @@
 						color: var(--theme-elevation-900);
 						align-self: flex-end;
 						margin-right: 0.6rem;
-					}
-				}
-
-				.orderInfo {
-					display: flex;
-					flex-direction: column;
-					font-size: 0.875rem;
-					color: var(--theme-elevation-500);
-
-					.emailAndId {
-						display: flex;
-						flex-direction: column;
-
-						.customerEmail {
-							font-weight: bold;
-							font-size: 1rem;
-							word-break: break-all;
-							color: inherit;
-							text-decoration: none;
-
-							&:hover {
-								text-decoration: underline;
-								color: var(--theme-elevation-800);
-							}
-						}
-
-						.orderIdSmall {
-							font-size: 0.8rem;
-							font-family: var(--font-mono), monospace;
-							color: var(--theme-elevation-400);
-							text-decoration: none;
-
-							&:hover {
-								text-decoration: underline;
-								color: var(--theme-elevation-600);
-							}
-						}
 					}
 				}
 			}
@@ -249,12 +243,12 @@
 		.orderList {
 			.order {
 				.orderDetails {
-					.orderStatus {
-
-					}
-
 					.orderSummary {
 						flex-direction: row;
+
+						.orderPrice {
+							font-size: 1.5rem;
+						}
 					}
 				}
 			}

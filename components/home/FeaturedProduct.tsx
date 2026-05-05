@@ -37,6 +37,7 @@ export const FeaturedProduct = async () => {
 					className="absolute inset-0 h-full w-full object-cover opacity-80"
 					fill
 					preload
+					loading={"eager"}
 				/>
 				<div className="bg-linear-to-b absolute inset-0 from-black/40 via-transparent to-black/60" />
 				<div className="relative z-10 flex w-full max-w-5xl flex-col items-center">

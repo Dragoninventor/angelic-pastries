@@ -8,6 +8,7 @@ import { Price } from "@/components/ui/Price";
 import { updateOrderAction } from "../actions";
 import Link from "next/link";
 import { toast } from "@payloadcms/ui";
+import { SquarePen } from "lucide-react";
 
 interface OrderItemProps {
 	order: Order;
@@ -77,19 +78,26 @@ export const OrderItem: FC<OrderItemProps> = ({
 		);
 	};
 
+	const customer = order.customerEmail
+		? order.customerEmail
+		: order.customer && typeof order.customer !== "string"
+			? order.customer?.email
+			: undefined;
+
 	return (
 		<li className={styles.order}>
-			<div className={styles.orderDetails}>
+			<Link
+				href={`${adminRoute}/collections/orders/${order.id}`}
+				className={styles.orderDetails}
+			>
 				<div className={styles.orderHeader}>
 					<div className={styles.info}>
-						{order.customerEmail && (
-							<p className={styles.customerEmail}>
-								{order.customerEmail}
-							</p>
-						)}
 						<p className={styles.orderDate}>
 							{new Date(order.createdAt).toLocaleDateString()}
 						</p>
+						{customer && (
+							<p className={styles.customerEmail}>{customer}</p>
+						)}
 					</div>
 					{urgency && (
 						<div
@@ -99,41 +107,46 @@ export const OrderItem: FC<OrderItemProps> = ({
 						</div>
 					)}
 				</div>
-				<Link
-					href={`${adminRoute}/collections/orders/${order.id}`}
-					className={styles.orderSummary}
-				>
-					<ul className={styles.orderItemsList}>
-						{order.items?.map((item) => {
-							const productTitle =
-								typeof item.product === "object"
-									? item.product?.title
-									: item.product;
-							const variantTitle =
-								typeof item.variant === "object"
-									? item.variant?.title
-									: item.variant;
+				<div className={styles.orderSummary}>
+					<div className={styles.orderColumn}>
+						{order.notes && (
+							<p className={styles.orderNotes}>
+								<SquarePen size={14} />
+								<span>{order.notes}</span>
+							</p>
+						)}
+						<ul className={styles.orderItemsList}>
+							{order.items?.map((item) => {
+								const productTitle =
+									typeof item.product === "object"
+										? item.product?.title
+										: item.product;
+								const variantTitle =
+									typeof item.variant === "object"
+										? item.variant?.title
+										: item.variant;
 
-							const label = variantTitle
-								? variantTitle
-								: productTitle
-									? productTitle
-									: "Unknown Product";
+								const label = variantTitle
+									? variantTitle
+									: productTitle
+										? productTitle
+										: "Unknown Product";
 
-							return (
-								<li
-									key={item.id}
-									className={styles.orderItem}
-								>{`${label} × ${item.quantity}`}</li>
-							);
-						})}
-					</ul>
+								return (
+									<li
+										key={item.id}
+										className={styles.orderItem}
+									>{`${label} × ${item.quantity}`}</li>
+								);
+							})}
+						</ul>
+					</div>
 					<Price
 						amount={order.amount || 0}
 						className={styles.orderPrice}
 					/>
-				</Link>
-			</div>
+				</div>
+			</Link>
 			<hr className={styles.orderDivider} />
 			<div className={styles.orderActions}>
 				<label className={styles.checkboxLabel}>
