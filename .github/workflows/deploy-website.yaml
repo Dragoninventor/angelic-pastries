@@ -166,6 +166,11 @@ jobs:
                         docker volume create data || true
                         docker volume create payload-data || true
                     
+                        docker run --rm \
+                            -v payload-data:/app/public/media \
+                            alpine:3.21 \
+                            sh -c "mkdir -p /app/public/media && chown -R 1001:1001 /app/public/media && chmod -R u+rwX,g+rwX /app/public/media"
+                    
                         docker compose pull
                         dotenvx run -f .env.production -- docker compose up -d --remove-orphans
                     
