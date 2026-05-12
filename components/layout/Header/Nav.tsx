@@ -1,25 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import NavLink from "@/components/layout/Header/NavLink";
-import { Cart } from "@/components/cart";
-import { Hamburger } from "./Hamburger";
-import { cn } from "@/utils/cn";
+import {Cart} from "@/components/cart";
+import {Hamburger} from "./Hamburger";
+import {cn} from "@/utils/cn";
 
-const Nav = ({ authenticated = false }: { authenticated?: boolean }) => {
+const Nav = ({authenticated = false}: { authenticated?: boolean }) => {
 	const [open, setOpen] = useState(false);
 
 	return (
 		<>
-			<Hamburger active={open} onClick={() => setOpen(!open)} />
+			<Hamburger active={open} onClick={() => setOpen(!open)}/>
 
 			{/* Desktop Nav */}
 			<nav className={"hidden items-center gap-10 md:flex"}>
 				<NavLink href={"/"}>Home</NavLink>
-				<NavLink href={"/contact"}>Contact</NavLink>
+				{/*<NavLink href={"/contact"}>Contact</NavLink>*/}
 				{/*<NavLink href={"/checkout"}>Order Now</NavLink>*/}
 				{authenticated && <NavLink href={"/admin"}>Dashboard</NavLink>}
-				<Cart />
+				<Cart/>
 			</nav>
 
 			{/* Mobile Nav Overlay */}
@@ -32,16 +32,16 @@ const Nav = ({ authenticated = false }: { authenticated?: boolean }) => {
 				<NavLink href={"/"} onClick={() => setOpen(false)}>
 					Home
 				</NavLink>
-				<NavLink href={"/contact"} onClick={() => setOpen(false)}>
-					Contact
-				</NavLink>
+				{/*<NavLink href={"/contact"} onClick={() => setOpen(false)}>*/}
+				{/*	Contact*/}
+				{/*</NavLink>*/}
 				{authenticated && (
 					<NavLink href={"/admin"} onClick={() => setOpen(false)}>
 						Dashboard
 					</NavLink>
 				)}
 				<div onClick={() => setOpen(false)}>
-					<Cart />
+					<Cart/>
 				</div>
 			</nav>
 		</>
