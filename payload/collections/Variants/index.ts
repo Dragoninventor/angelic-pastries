@@ -18,6 +18,7 @@ export const Variants: CollectionOverride = ({ defaultCollection }) => {
 		admin: {
 			hidden: false,
 			group: "Ecommerce",
+			useAsTitle: "title"
 		},
 		// fields: [...defaultCollection.fields],
 		fields: [

@@ -6,6 +6,7 @@ export const VariantOptions: CollectionOverride = ({ defaultCollection }) => ({
 	admin: {
 		hidden: false,
 		group: "Ecommerce",
+		useAsTitle: "label"
 	},
 	trash: false,
 });

@@ -30,6 +30,7 @@ export const VariantTypes: CollectionOverride = ({ defaultCollection }) => {
 			...defaultCollection.admin,
 			hidden: false,
 			group: "Ecommerce",
+			useAsTitle: "label"
 		},
 		trash: false,
 	};
