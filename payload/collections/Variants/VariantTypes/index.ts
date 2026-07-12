@@ -1,7 +1,7 @@
-import { CollectionOverride } from "@payloadcms/plugin-ecommerce/types";
-import { Field } from "payload";
+import {CollectionOverride} from "@payloadcms/plugin-ecommerce/types";
+import {Field} from "payload";
 
-export const VariantTypes: CollectionOverride = ({ defaultCollection }) => {
+export const VariantTypes: CollectionOverride = ({defaultCollection}) => {
 	const fields: Field[] = [
 		{
 			name: "label",

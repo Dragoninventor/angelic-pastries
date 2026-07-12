@@ -1,11 +1,11 @@
-import { CollectionOverride } from "@payloadcms/plugin-ecommerce/types";
-import { publicAccess } from "@/payload/access/publicAccess";
-import { adminOnly } from "@/payload/access/adminOnly";
-import { validateOptions } from "@/payload/collections/Variants/hooks/validateOptions";
-import { pricesField } from "@payloadcms/plugin-ecommerce";
-import { Currencies } from "@/payload/collections/Currencies";
+import {CollectionOverride} from "@payloadcms/plugin-ecommerce/types";
+import {publicAccess} from "@/payload/access/publicAccess";
+import {adminOnly} from "@/payload/access/adminOnly";
+import {validateOptions} from "@/payload/collections/Variants/hooks/validateOptions";
+import {pricesField} from "@payloadcms/plugin-ecommerce";
+import {Currencies} from "@/payload/collections/Currencies";
 
-export const Variants: CollectionOverride = ({ defaultCollection }) => {
+export const Variants: CollectionOverride = ({defaultCollection}) => {
 	return {
 		...defaultCollection,
 		// PERMISSIONS ERROR WHEN I DISABLE VERSIONS, UPDATE ACCESS VALUE SINCE PAYLOAD SETS A RESTRICTIVE ONE

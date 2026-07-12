@@ -1,8 +1,9 @@
 "use client";
 
 import { useCurrency } from "@payloadcms/plugin-ecommerce/client/react";
-import { ComponentPropsWithoutRef, useMemo } from "react";
+// import { ComponentPropsWithoutRef, useMemo } from "react";
 import { cn } from "@/utils/cn";
+import { ComponentPropsWithoutRef, useMemo } from "react";
 
 type BaseProps = {
 	className?: string;

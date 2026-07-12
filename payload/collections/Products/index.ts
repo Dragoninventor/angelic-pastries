@@ -1,5 +1,5 @@
-import { slugField } from "@/payload/fields/slug";
-import { CollectionOverride } from "@payloadcms/plugin-ecommerce/types";
+import {slugField} from "@/payload/fields/slug";
+import {CollectionOverride} from "@payloadcms/plugin-ecommerce/types";
 import {
 	FixedToolbarFeature,
 	HeadingFeature,
@@ -7,18 +7,18 @@ import {
 	InlineToolbarFeature,
 	lexicalEditor,
 } from "@payloadcms/richtext-lexical";
-import { DefaultDocumentIDType, Where } from "payload";
-import { Product, VariantType } from "@/payload-types";
-import { Currencies } from "@/payload/collections/Currencies";
-import { amountField } from "@payloadcms/plugin-ecommerce";
-import { validateWithinQuantityRange } from "@/payload/validations/validateWithinQuantityRange";
-import { validateEndDateAfterStart } from "@/payload/validations/validateEndDateAfterStart";
+import {DefaultDocumentIDType, Where} from "payload";
+import {Product, VariantType} from "@/payload-types";
+import {Currencies} from "@/payload/collections/Currencies";
+import {amountField} from "@payloadcms/plugin-ecommerce";
+import {validateWithinQuantityRange} from "@/payload/validations/validateWithinQuantityRange";
+import {validateEndDateAfterStart} from "@/payload/validations/validateEndDateAfterStart";
 
 const currency = Currencies.supportedCurrencies.find(
 	(currency) => currency.code === Currencies.defaultCurrency,
 );
 
-export const Products: CollectionOverride = ({ defaultCollection }) => {
+export const Products: CollectionOverride = ({defaultCollection}) => {
 	return {
 		...defaultCollection,
 		admin: {
@@ -63,7 +63,7 @@ export const Products: CollectionOverride = ({ defaultCollection }) => {
 								label: "Description",
 								type: "richText",
 								editor: lexicalEditor({
-									features: ({ rootFeatures }) => {
+									features: ({rootFeatures}) => {
 										return [
 											...rootFeatures,
 											HeadingFeature({
@@ -102,13 +102,13 @@ export const Products: CollectionOverride = ({ defaultCollection }) => {
 											condition: (data) => {
 												return (
 													data?.enableVariants ===
-														true &&
+													true &&
 													data?.variantTypes?.length >
-														0
+													0
 												);
 											},
 										},
-										filterOptions: ({ data }) => {
+										filterOptions: ({data}) => {
 											if (
 												data?.enableVariants &&
 												data?.variantTypes?.length > 0
@@ -118,7 +118,7 @@ export const Products: CollectionOverride = ({ defaultCollection }) => {
 														(item: VariantType) => {
 															if (
 																typeof item ===
-																	"object" &&
+																"object" &&
 																item?.id
 															) {
 																return item.id;
@@ -182,7 +182,7 @@ export const Products: CollectionOverride = ({ defaultCollection }) => {
 											validateWithinQuantityRange<Product>(),
 										hooks: {
 											beforeChange: [
-												({ value }) => {
+												({value}) => {
 													if (
 														Array.isArray(value) &&
 														value.length > 0
@@ -450,7 +450,7 @@ export const Products: CollectionOverride = ({ defaultCollection }) => {
 							{
 								name: "relatedProducts",
 								type: "relationship",
-								filterOptions: ({ id }) => {
+								filterOptions: ({id}) => {
 									if (id) {
 										return {
 											id: {
