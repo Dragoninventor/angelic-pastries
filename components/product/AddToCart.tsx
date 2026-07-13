@@ -2,7 +2,7 @@
 
 import { Product, Variant } from "@/payload-types";
 import { useCart } from "@payloadcms/plugin-ecommerce/client/react";
-import { FormEvent, useCallback, useMemo, useRef } from "react";
+import { SyntheticEvent, useCallback, useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -60,7 +60,7 @@ export const AddToCart = ({
 		.join(", ");
 
 	const addToCart = useCallback(
-		(event: FormEvent<HTMLButtonElement>) => {
+		(event: SyntheticEvent<HTMLButtonElement>) => {
 			event.preventDefault();
 
 			// const defaultQuantity = product.quantities.
@@ -105,7 +105,7 @@ export const AddToCart = ({
 		[addItem, product, selectedVariant, quantity, cart, showNotification],
 	);
 
-	const handleClick = (event: FormEvent<HTMLButtonElement>) => {
+	const handleClick = (event: SyntheticEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 
 		if (isDisabled) {

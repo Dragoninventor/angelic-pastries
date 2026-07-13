@@ -15,9 +15,10 @@ const SiteHeader = async () => {
 	return (
 		<header
 			className={
-				"bg-sage-200 flex h-32 items-center justify-between overflow-x-hidden px-8"
+				"bg-sage-200 sticky top-0 z-10 flex h-20 w-full items-center justify-between shadow-lg shadow-gray-700/15 md:h-32"
 			}
 		>
+			{/* TODO: Move logo inside of Nav to allow for closing the nav on click without a smooth transition */}
 			<Logo />
 			<Nav authenticated={Boolean(user)} />
 		</header>

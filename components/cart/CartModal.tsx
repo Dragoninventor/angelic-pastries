@@ -184,12 +184,12 @@ export const CartModal = () => {
 																</div>
 																<div
 																	className={
-																		"flex flex-1 flex-col text-base"
+																		"flex flex-1 flex-col"
 																	}
 																>
 																	<span
 																		className={
-																			"text-gray-800"
+																			"text-base text-gray-800"
 																		}
 																	>
 																		{
@@ -200,7 +200,7 @@ export const CartModal = () => {
 																	variant ? (
 																		<p
 																			className={
-																				"text-sm capitalize text-gray-500"
+																				"text-xs capitalize text-gray-500"
 																			}
 																		>
 																			{variant.options

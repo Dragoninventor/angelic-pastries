@@ -3,7 +3,7 @@ import { font_logo } from "@/styles/fonts";
 
 const Logo = () => {
 	return (
-		<Link href={"/"}>
+		<Link href={"/"} className={"absolute left-8 z-20"}>
 			<h1
 				className={`${font_logo.className} text-sage-950 text-4xl md:text-6xl lg:text-7xl`}
 			>

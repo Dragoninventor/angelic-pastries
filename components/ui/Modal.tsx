@@ -26,7 +26,7 @@ export const Modal = ({
 			<ModalOverlay
 				{...props}
 				className={
-					"h-vh absolute left-0 top-0 isolate z-50 w-full bg-black/50"
+					"h-vh fixed left-0 top-0 isolate z-20 w-full bg-black/50"
 				}
 			>
 				<div

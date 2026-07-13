@@ -25,22 +25,22 @@ export const OpenCartButton = ({ className, ...props }: Props) => {
 
 	return (
 		<div
-			className={`transition-width flex items-center justify-center duration-150 ${quantity ? "max-w-28" : "pointer-events-none max-w-0 delay-150"}${className ? ` ${className}` : ""}`}
+			className={`fixed bottom-6 right-4 z-10 transition-opacity duration-150 ${quantity ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}${className ? ` ${className}` : ""}`}
 		>
 			<Button
-				className={`${font_sitenav.className} gap-1.5 text-lg transition-opacity duration-150 ${quantity ? "opacity-100 delay-150" : "opacity-0"}`}
+				className={`${font_sitenav.className} relative h-16 w-16 rounded-full p-0 shadow shadow-gray-700/30`}
 				{...props}
 			>
-				<ShoppingCart className={"h-4 w-4"} />
-				<span className={"inline-flex gap-0.5"}>
-					Cart
-					{quantity && (
-						<>
-							<span>•</span>
-							<span>{quantity}</span>
-						</>
-					)}
-				</span>
+				<ShoppingCart className={"h-5 w-5"} />
+				{quantity && (
+					<span
+						className={
+							"text-sage-700 bg-sage-50 absolute -right-1 -top-1 flex aspect-square h-6 w-6 items-center justify-center rounded-full text-xs shadow shadow-gray-700/30"
+						}
+					>
+						{quantity}
+					</span>
+				)}
 			</Button>
 		</div>
 	);

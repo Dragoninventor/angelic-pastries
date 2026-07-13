@@ -29,10 +29,10 @@ export const Button = ({
 		secondary:
 			"cursor-pointer bg-slate-600 text-slate-50 border-transparent hover:bg-slate-700",
 		"secondary-outline":
-			"cursor-pointer bg-slate-50 text-slate-700 border-slate-300 hover:bg-slate-100",
+			"cursor-pointer bg-slate-100 text-slate-700 border-slate-300 hover:border-slate-400",
 		vibrant:
 			"cursor-pointer bg-vanilla-600 text-gray-50 border-transparent hover:bg-vanilla-700",
-		disabled: "bg-gray-200 text-gray-500 border-transparent",
+		disabled: "bg-slate-200 text-slate-500 border-transparent",
 	};
 	const sizes = {
 		sm: "px-3 py-1.5 text-sm gap-0.5",

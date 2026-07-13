@@ -31,7 +31,7 @@ export const FeaturedProduct = async () => {
 
 	return (
 		<section className="bg-vanilla-50 relative">
-			<div className="relative flex min-h-[calc(100dvh-8rem)] w-full flex-col items-center justify-start overflow-hidden bg-black px-4 pb-16 pt-16 text-white md:pb-24 md:pt-24">
+			<div className="relative flex h-full min-h-[calc(100dvh-5rem)] w-full flex-col items-center justify-start overflow-hidden bg-black px-4 py-12 text-white md:min-h-[calc(100dvh-8rem)] xl:py-16">
 				<Image
 					payloadImage={bannerImage}
 					className="absolute inset-0 h-full w-full object-cover opacity-80"
@@ -40,7 +40,7 @@ export const FeaturedProduct = async () => {
 					loading={"eager"}
 				/>
 				<div className="bg-linear-to-b absolute inset-0 from-black/40 via-transparent to-black/60" />
-				<div className="relative z-10 flex w-full max-w-5xl flex-col items-center">
+				<div className="relative flex w-full max-w-5xl flex-col items-center">
 					{/* Title Section */}
 					<div className="font-hero mb-10 text-5xl md:mb-16 md:text-8xl lg:text-9xl">
 						<h1 className="relative text-center">
@@ -69,7 +69,7 @@ export const FeaturedProduct = async () => {
 						</h1>
 					</div>
 					{/* Content Card */}
-					<div className="border-sage-100 text-sage-800 mx-auto flex w-full max-w-2xl flex-col items-center border bg-white px-4 py-6 text-center shadow-xl md:px-6 md:py-10">
+					<div className="mx-auto flex w-full max-w-2xl flex-col items-center bg-slate-50 px-4 py-6 text-center text-slate-800 shadow-xl shadow-black/30 md:px-6 md:py-10">
 						{featuredProduct.description && (
 							<div className="mb-6 max-w-md font-light leading-relaxed md:text-lg">
 								<RichText

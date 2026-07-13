@@ -1,47 +1,70 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavLink from "@/components/layout/Header/NavLink";
-import { Cart } from "@/components/cart";
 import { Hamburger } from "./Hamburger";
 import { cn } from "@/utils/cn";
+import { usePathname } from "next/navigation";
 
 const Nav = ({ authenticated = false }: { authenticated?: boolean }) => {
 	const [open, setOpen] = useState(false);
+	const [smoothTransition, setSmoothTransition] = useState(true);
+
+	const pathname = usePathname();
+
+	const toggleNav = () => {
+		setSmoothTransition(true);
+		setOpen((open) => !open);
+	};
+
+	const closeNav = (smooth: boolean = false) => {
+		setSmoothTransition(smooth);
+		setOpen(false);
+	};
+
+	useEffect(() => {
+		if (open) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+
+		return () => {
+			document.body.style.overflow = "";
+		};
+	}, [open]);
+
+	useEffect(() => {
+		closeNav();
+	}, [pathname]);
 
 	return (
 		<>
-			<Hamburger active={open} onClick={() => setOpen(!open)} />
-
-			{/* Desktop Nav */}
-			<nav className={"hidden items-center gap-10 md:flex"}>
-				<NavLink href={"/"}>Home</NavLink>
-				{/*<NavLink href={"/contact"}>Contact</NavLink>*/}
-				{/*<NavLink href={"/checkout"}>Order Now</NavLink>*/}
-				{authenticated && <NavLink href={"/admin"}>Dashboard</NavLink>}
-				<Cart />
-			</nav>
-
-			{/* Mobile Nav Overlay */}
+			<Hamburger active={open} onClick={() => toggleNav()} />
 			<nav
 				className={cn(
-					"bg-sage-200 fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 ease-in-out md:hidden",
-					open ? "translate-x-0" : "translate-x-full",
+					"fixed inset-0 z-10 flex w-full flex-col items-center overflow-hidden px-6 pt-20 ease-in-out md:relative md:inset-auto md:right-8 md:z-auto md:flex md:translate-x-0 md:flex-row md:justify-end md:gap-10 md:bg-transparent md:px-0 md:pt-0 md:transition-none",
+					open
+						? "bg-sage-100 translate-x-0 delay-[0s,0.2s]"
+						: "bg-sage-200 translate-x-full delay-[0.2s,0s] md:translate-x-0",
+					smoothTransition
+						? "transition-[translate,background-color] duration-[0.2s,0.2s]"
+						: "",
 				)}
 			>
-				<NavLink href={"/"} onClick={() => setOpen(false)}>
-					Home
-				</NavLink>
-				{/*<NavLink href={"/contact"} onClick={() => setOpen(false)}>*/}
-				{/*	Contact*/}
-				{/*</NavLink>*/}
-				{authenticated && (
-					<NavLink href={"/admin"} onClick={() => setOpen(false)}>
-						Dashboard
+				<div
+					className={
+						"border-sage-300 mt-12 flex w-full flex-col items-end gap-6 border-y py-8 transition-[border-color] delay-200 duration-200 md:mt-0 md:flex-row md:justify-end md:gap-8 md:border-none md:py-0"
+					}
+				>
+					<NavLink href={"/"} onClick={() => closeNav()}>
+						Home
 					</NavLink>
-				)}
-				<div onClick={() => setOpen(false)}>
-					<Cart />
+					{authenticated && (
+						<NavLink href={"/admin"} onClick={() => closeNav()}>
+							Dashboard
+						</NavLink>
+					)}
 				</div>
 			</nav>
 		</>

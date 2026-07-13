@@ -10,6 +10,7 @@ import {
 	font_sitenav,
 } from "@/styles/fonts";
 import { Providers } from "@/components/Providers";
+import { Cart } from "@/components/cart";
 
 export const metadata: Metadata = {
 	title: "Angela's Store",
@@ -26,10 +27,11 @@ export default function RootLayout({
 			<body
 				className={`${font_default.variable} ${font_hero.variable} ${font_logo.variable} ${font_sitenav.variable} ${font_default.className} bg-vanilla-50`}
 			>
-				<Providers>
-					<SiteHeader />
-					{children}
-				</Providers>
+			<Providers>
+				<SiteHeader />
+				{children}
+				<Cart />
+			</Providers>
 			</body>
 		</html>
 	);

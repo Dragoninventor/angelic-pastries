@@ -51,7 +51,7 @@ const ProductPage = async ({ params }: Args) => {
 			</Button>
 			<div
 				className={
-					"bg-sage-50 flex flex-col gap-12 rounded-lg border border-slate-400 p-2 md:py-12 lg:flex-row lg:gap-8"
+					"flex flex-col gap-12 rounded-lg border border-slate-400 bg-slate-50 p-2 md:py-12 lg:flex-row lg:gap-8"
 				}
 			>
 				<div className={"h-full w-full basis-full lg:basis-1/2"}>
