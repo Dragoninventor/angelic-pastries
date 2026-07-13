@@ -42,7 +42,7 @@ export const FeaturedProduct = async () => {
 				<div className="bg-linear-to-b absolute inset-0 from-black/40 via-transparent to-black/60" />
 				<div className="relative flex w-full max-w-5xl flex-col items-center">
 					{/* Title Section */}
-					<div className="font-hero mb-10 text-5xl md:mb-16 md:text-8xl lg:text-9xl">
+					<div className="font-hero mb-10 text-6xl md:mb-16 md:text-8xl lg:text-9xl">
 						<h1 className="relative text-center">
 							<span className="sr-only">
 								{featuredProduct.title}
@@ -71,7 +71,7 @@ export const FeaturedProduct = async () => {
 					{/* Content Card */}
 					<div className="mx-auto flex w-full max-w-2xl flex-col items-center bg-slate-50 px-4 py-6 text-center text-slate-800 shadow-xl shadow-black/30 md:px-6 md:py-10">
 						{featuredProduct.description && (
-							<div className="mb-6 max-w-md font-light leading-relaxed md:text-lg">
+							<div className="mb-6 max-w-md text-sm font-light leading-relaxed lg:text-base">
 								<RichText
 									data={content}
 									className="container-none prose-sage mx-0 max-w-none"
