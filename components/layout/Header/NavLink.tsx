@@ -21,7 +21,7 @@ const NavLink = ({
 		<div className={"flex flex-col"}>
 			<Link
 				href={href}
-				className={`${font_sitenav.className} text-sage-700 hover:text-sage-950 peer text-4xl tracking-tight transition-colors aria-[current=page]:underline aria-[current=page]:underline-offset-4 md:text-2xl md:tracking-tight`}
+				className={`${font_sitenav.className} text-sage-700 hover:text-sage-950 mb-1.5 text-4xl tracking-tight transition-colors aria-[current=page]:underline aria-[current=page]:underline-offset-4 md:mb-0 md:text-2xl md:tracking-tight`}
 				aria-current={href === pathname ? "page" : undefined}
 				onClick={onClick}
 			>
