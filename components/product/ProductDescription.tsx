@@ -123,7 +123,9 @@ export function ProductDescription({ product }: { product: Product }) {
 	return (
 		<div className="flex flex-col gap-6">
 			<div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-				<h1 className="mb-2 text-2xl font-medium">{product.title}</h1>
+				<h1 className="mb-2.5 text-2xl font-medium lg:mb-0 lg:text-3xl">
+					{product.title}
+				</h1>
 				{displayPrice}
 			</div>
 			{product.description ? (

@@ -91,7 +91,7 @@ export const Gallery = ({ product }: Props) => {
 									key={index}
 									payloadImage={item.image}
 									className={
-										"aspect-square min-w-full object-cover"
+										"aspect-square max-h-96 min-w-full object-cover md:max-h-none"
 									}
 								/>
 							);

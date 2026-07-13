@@ -41,8 +41,13 @@ const ProductPage = async ({ params }: Args) => {
 	}
 
 	return (
-		<div className={"container py-8 sm:mx-auto"}>
-			<Button asChild variant={"secondary-outline"} className={"mb-2"}>
+		<div className={"container px-2 py-5 sm:mx-auto"}>
+			<Button
+				asChild
+				variant={"secondary-outline"}
+				size={"sm"}
+				className={"mb-2"}
+			>
 				<Link href={"/"}>
 					<ArrowLeft className={"mr-1 size-4"} />
 					{/*All products*/}
@@ -51,13 +56,13 @@ const ProductPage = async ({ params }: Args) => {
 			</Button>
 			<div
 				className={
-					"flex flex-col gap-12 rounded-lg border border-slate-400 bg-slate-50 p-2 md:py-12 lg:flex-row lg:gap-8"
+					"flex flex-col gap-4 rounded-lg border border-slate-400 bg-slate-50 px-2 pb-5 pt-2 sm:px-4 sm:pt-4 md:flex-row md:gap-6 lg:gap-8 lg:px-6 lg:pb-8 lg:pt-8"
 				}
 			>
-				<div className={"h-full w-full basis-full lg:basis-1/2"}>
+				<div className={"h-full w-full basis-full md:basis-1/2"}>
 					<Gallery product={product} />
 				</div>
-				<div className={"flex basis-full flex-col gap-6 lg:basis-1/2"}>
+				<div className={"flex basis-full flex-col gap-6 md:basis-1/2"}>
 					<ProductDescription product={product} />
 					{hasVariants && (
 						<>
