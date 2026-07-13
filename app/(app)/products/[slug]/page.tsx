@@ -56,13 +56,19 @@ const ProductPage = async ({ params }: Args) => {
 			</Button>
 			<div
 				className={
-					"flex flex-col gap-4 rounded-lg border border-slate-400 bg-slate-50 px-2 pb-5 pt-2 sm:px-4 sm:pt-4 md:flex-row md:gap-6 lg:gap-8 lg:px-6 lg:pb-8 lg:pt-8"
+					"flex flex-1 flex-col gap-4 rounded-lg border border-slate-400 bg-slate-50 px-2 pb-5 pt-2 sm:px-4 sm:pt-4 md:flex-row md:gap-6 lg:gap-8 lg:px-6 lg:pb-8 lg:pt-8"
 				}
 			>
-				<div className={"h-full w-full basis-full md:basis-1/2"}>
+				<div
+					className={"h-full w-full basis-full md:w-1/2 md:basis-1/2"}
+				>
 					<Gallery product={product} />
 				</div>
-				<div className={"flex basis-full flex-col gap-6 md:basis-1/2"}>
+				<div
+					className={
+						"flex w-full basis-full flex-col gap-6 md:w-1/2 md:basis-1/2"
+					}
+				>
 					<ProductDescription product={product} />
 					{hasVariants && (
 						<>

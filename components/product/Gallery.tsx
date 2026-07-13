@@ -91,7 +91,7 @@ export const Gallery = ({ product }: Props) => {
 									key={index}
 									payloadImage={item.image}
 									className={
-										"aspect-square max-h-96 min-w-full object-cover md:max-h-none"
+										"aspect-square max-h-96 min-w-full object-cover lg:max-h-none"
 									}
 								/>
 							);
@@ -99,7 +99,7 @@ export const Gallery = ({ product }: Props) => {
 					</div>
 				</div>
 				<div
-					className={`relative order-2 flex w-full flex-row gap-2 overflow-x-auto lg:order-1 lg:h-full lg:w-20 lg:flex-col lg:overflow-y-auto`}
+					className={`relative order-2 flex w-full flex-row gap-2 overflow-hidden overflow-x-auto rounded lg:order-1 lg:h-full lg:w-20 lg:flex-col lg:overflow-y-auto`}
 					data-slot={"carousel-content"}
 				>
 					{gallery.map((item, index) => {
@@ -109,7 +109,7 @@ export const Gallery = ({ product }: Props) => {
 								aria-roledescription={"slide"}
 								data-slot={"carousel-item"}
 								className={
-									"relative flex w-20 shrink-0 lg:w-full"
+									"relative flex aspect-square w-20 shrink-0 lg:w-full"
 								}
 								key={index}
 								onClick={() => setCurrentIndex(index)}
