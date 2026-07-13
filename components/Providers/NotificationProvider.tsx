@@ -74,14 +74,14 @@ export const NotificationProvider = ({
 	return (
 		<NotificationContext.Provider value={{ showNotification }}>
 			{children}
-			<div className="pointer-events-none fixed left-0 top-0 z-20 flex h-dvh w-full justify-center overflow-hidden">
+			<div className="pointer-events-none fixed left-0 top-0 z-20 flex h-dvh w-full justify-center overflow-hidden px-4">
 				{notifications.map((notification) => (
 					// TODO: Make this more accessible with a "separate" close button
 					<button
 						key={notification.id}
 						onClick={() => dismissNotification(notification.id)}
 						className={cn(
-							"min-w-75 starting:[translate:0_0] group/toast pointer-events-auto absolute mx-auto flex w-full cursor-pointer items-center justify-between rounded-lg border px-9 py-4 opacity-100 shadow-lg shadow-gray-300/15 transition-[translate,color,border-color] duration-[0.5s,0.2s,0.2s] [translate:0_var(--notify-y)] sm:max-w-lg sm:px-12",
+							"starting:[translate:0_0] group/toast pointer-events-auto absolute flex max-w-md cursor-pointer items-center justify-between rounded-lg border px-9 py-4 opacity-100 shadow-lg shadow-gray-300/15 transition-[translate,color,border-color] duration-[0.5s,0.2s,0.2s] [translate:0_var(--notify-y)] sm:max-w-lg sm:px-12",
 							notification.state === "active" ? "z-20" : "z-10",
 							notification.type === "success" &&
 								"border-sage-400 text-sage-800 hover:border-sage-600 bg-sage-50",
