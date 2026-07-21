@@ -3,7 +3,7 @@
 import { CartItem } from "@/components/cart";
 import { useCart } from "@payloadcms/plugin-ecommerce/client/react";
 import { cn } from "@/utils/cn";
-import { FormEvent } from "react";
+import { SyntheticEvent } from "react";
 import { MinusIcon, PlusIcon } from "lucide-react";
 
 export const EditItemQuantityButton = ({
@@ -15,11 +15,20 @@ export const EditItemQuantityButton = ({
 }) => {
 	const { incrementItem, decrementItem } = useCart();
 
+	const product =
+		item.product && typeof item.product !== "string" ? item.product : null;
+
+	const isDisabled =
+		type === "plus"
+			? item.quantity >=
+				(product?.quantities?.quantityMaximum ?? Infinity)
+			: item.quantity <= (product?.quantities?.quantityMinimum ?? 0);
+
 	return (
 		<form>
 			<button
 				type={"button"}
-				disabled={false}
+				disabled={isDisabled}
 				aria-label={
 					type === "plus"
 						? "Increase item quantity"
@@ -28,19 +37,20 @@ export const EditItemQuantityButton = ({
 				className={cn(
 					"ease flex h-full min-h-8 flex-none cursor-pointer items-center justify-center rounded-full transition-all duration-200 hover:border-neutral-800 hover:opacity-80",
 					{
-						"cursor-not-allowed": false,
+						"cursor-not-allowed": isDisabled,
 						"ml-auto": type === "minus",
+						"opacity-50": isDisabled,
 					},
 				)}
-				onClick={(event: FormEvent<HTMLButtonElement>) => {
+				onClick={(event: SyntheticEvent<HTMLButtonElement>) => {
 					event.preventDefault();
-
-					console.log(item.product);
 
 					if (
 						item.product &&
 						typeof item.product !== "string" &&
-						item.id
+						typeof item.variant !== "string" &&
+						item.id &&
+						!isDisabled
 					) {
 						if (type === "plus") {
 							void incrementItem(item.id);
