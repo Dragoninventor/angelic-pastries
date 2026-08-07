@@ -33,7 +33,7 @@ export default function RootLayout({
 					{children}
 					<Cart />
 				</Providers>
-				{/* Google tag */}
+				{/* Google tag stuff */}
 				<Script
 					src={
 						"https://www.googletagmanager.com/gtag/js?id=AW-18311865890"
