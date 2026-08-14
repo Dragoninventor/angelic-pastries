@@ -304,9 +304,30 @@ export interface Product {
   priceInUSDEnabled?: boolean | null;
   priceInUSD?: number | null;
   quantities: {
+    /**
+     * Specific quantities that will appear as buttons for the customer to choose from.
+     */
     quantityOptions: number[];
+    /**
+     * The smallest amount of this product that can be ordered.
+     */
     quantityMinimum: number;
+    /**
+     * The largest amount of this product that can be ordered.
+     */
     quantityMaximum: number;
+    /**
+     * Enable if this product must be ordered in specific increments (e.g. boxes/sets of 6).
+     */
+    enableProductSets?: boolean | null;
+    /**
+     * Allow customers to type in their own quantity instead of using the preset quantity buttons.
+     */
+    enableCustomQuantities?: boolean | null;
+    /**
+     * The number of items in each batch or the increment size (e.g. 6).
+     */
+    quantitySet?: number | null;
   };
   discounts?:
     | {
@@ -977,6 +998,9 @@ export interface ProductsSelect<T extends boolean = true> {
         quantityOptions?: T;
         quantityMinimum?: T;
         quantityMaximum?: T;
+        enableProductSets?: T;
+        enableCustomQuantities?: T;
+        quantitySet?: T;
       };
   discounts?:
     | T

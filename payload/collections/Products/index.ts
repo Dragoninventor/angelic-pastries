@@ -1,5 +1,5 @@
-import {slugField} from "@/payload/fields/slug";
-import {CollectionOverride} from "@payloadcms/plugin-ecommerce/types";
+import { slugField } from "@/payload/fields/slug";
+import { CollectionOverride } from "@payloadcms/plugin-ecommerce/types";
 import {
 	FixedToolbarFeature,
 	HeadingFeature,
@@ -7,18 +7,18 @@ import {
 	InlineToolbarFeature,
 	lexicalEditor,
 } from "@payloadcms/richtext-lexical";
-import {DefaultDocumentIDType, Where} from "payload";
-import {Product, VariantType} from "@/payload-types";
-import {Currencies} from "@/payload/collections/Currencies";
-import {amountField} from "@payloadcms/plugin-ecommerce";
-import {validateWithinQuantityRange} from "@/payload/validations/validateWithinQuantityRange";
-import {validateEndDateAfterStart} from "@/payload/validations/validateEndDateAfterStart";
+import { DefaultDocumentIDType, Where } from "payload";
+import { Product, VariantType } from "@/payload-types";
+import { Currencies } from "@/payload/collections/Currencies";
+import { amountField } from "@payloadcms/plugin-ecommerce";
+import { validateWithinQuantityRange } from "@/payload/validations/validateWithinQuantityRange";
+import { validateEndDateAfterStart } from "@/payload/validations/validateEndDateAfterStart";
 
 const currency = Currencies.supportedCurrencies.find(
 	(currency) => currency.code === Currencies.defaultCurrency,
 );
 
-export const Products: CollectionOverride = ({defaultCollection}) => {
+export const Products: CollectionOverride = ({ defaultCollection }) => {
 	return {
 		...defaultCollection,
 		admin: {
@@ -63,7 +63,7 @@ export const Products: CollectionOverride = ({defaultCollection}) => {
 								label: "Description",
 								type: "richText",
 								editor: lexicalEditor({
-									features: ({rootFeatures}) => {
+									features: ({ rootFeatures }) => {
 										return [
 											...rootFeatures,
 											HeadingFeature({
@@ -102,13 +102,13 @@ export const Products: CollectionOverride = ({defaultCollection}) => {
 											condition: (data) => {
 												return (
 													data?.enableVariants ===
-													true &&
+														true &&
 													data?.variantTypes?.length >
-													0
+														0
 												);
 											},
 										},
-										filterOptions: ({data}) => {
+										filterOptions: ({ data }) => {
 											if (
 												data?.enableVariants &&
 												data?.variantTypes?.length > 0
@@ -118,7 +118,7 @@ export const Products: CollectionOverride = ({defaultCollection}) => {
 														(item: VariantType) => {
 															if (
 																typeof item ===
-																"object" &&
+																	"object" &&
 																item?.id
 															) {
 																return item.id;
@@ -170,19 +170,23 @@ export const Products: CollectionOverride = ({defaultCollection}) => {
 								fields: [
 									{
 										name: "quantityOptions",
-										label: "Product Quantity Options",
+										label: "Preset Quantity Buttons",
 										type: "number",
 										hasMany: true,
 										maxRows: 6,
 										min: 1,
 										max: 999,
 										required: true,
+										admin: {
+											description:
+												"Specific quantities that will appear as buttons for the customer to choose from.",
+										},
 										// Manually setting the type for the props, since payloadcms/typescript can't infer it: https://github.com/payloadcms/payload/issues/7549
 										validate:
 											validateWithinQuantityRange<Product>(),
 										hooks: {
 											beforeChange: [
-												({value}) => {
+												({ value }) => {
 													if (
 														Array.isArray(value) &&
 														value.length > 0
@@ -205,27 +209,74 @@ export const Products: CollectionOverride = ({defaultCollection}) => {
 										fields: [
 											{
 												name: "quantityMinimum",
-												label: "Order Minimum Quantity",
+												label: "Minimum Order Quantity",
 												type: "number",
 												min: 1,
 												max: 999,
+												defaultValue: 1,
 												required: true,
 												admin: {
 													width: "50%",
+													description:
+														"The smallest amount of this product that can be ordered.",
 												},
 											},
 											{
 												name: "quantityMaximum",
-												label: "Order Maximum Quantity",
+												label: "Maximum Order Quantity",
 												type: "number",
 												min: 1,
 												max: 999,
+												defaultValue: 999,
 												required: true,
 												admin: {
 													width: "50%",
+													description:
+														"The largest amount of this product that can be ordered.",
 												},
 											},
 										],
+									},
+									{
+										type: "row",
+										fields: [
+											{
+												name: "enableProductSets",
+												label: "Sell in Batches",
+												type: "checkbox",
+												admin: {
+													width: "50%",
+													description:
+														"Enable if this product must be ordered in specific increments (e.g. boxes/sets of 6).",
+												},
+											},
+											{
+												name: "enableCustomQuantities",
+												type: "checkbox",
+												label: "Allow Custom Quantities",
+												admin: {
+													width: "50%",
+													description:
+														"Allow customers to type in their own quantity instead of using the preset quantity buttons.",
+												},
+											},
+										],
+									},
+									{
+										name: "quantitySet",
+										label: "Batch Size (Increment)",
+										type: "number",
+										min: 1,
+										max: 999,
+										defaultValue: 1,
+										required: true,
+										admin: {
+											condition: (_, siblingData) => {
+												return siblingData?.enableProductSets;
+											},
+											description:
+												"The number of items in each batch or the increment size (e.g. 6).",
+										},
 									},
 								],
 							},
@@ -450,7 +501,7 @@ export const Products: CollectionOverride = ({defaultCollection}) => {
 							{
 								name: "relatedProducts",
 								type: "relationship",
-								filterOptions: ({id}) => {
+								filterOptions: ({ id }) => {
 									if (id) {
 										return {
 											id: {

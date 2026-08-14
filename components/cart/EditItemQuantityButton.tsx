@@ -13,10 +13,11 @@ export const EditItemQuantityButton = ({
 	item: CartItem;
 	type: "minus" | "plus";
 }) => {
-	const { incrementItem, decrementItem } = useCart();
+	const { addItem } = useCart();
 
 	const product =
 		item.product && typeof item.product !== "string" ? item.product : null;
+	const step = product?.quantities?.quantitySet ?? 1;
 
 	const isDisabled =
 		type === "plus"
@@ -48,15 +49,19 @@ export const EditItemQuantityButton = ({
 					if (
 						item.product &&
 						typeof item.product !== "string" &&
-						typeof item.variant !== "string" &&
 						item.id &&
 						!isDisabled
 					) {
-						if (type === "plus") {
-							void incrementItem(item.id);
-						} else {
-							void decrementItem(item.id);
-						}
+						void addItem(
+							{
+								product: item.product.id,
+								variant:
+									typeof item.variant === "object"
+										? item.variant?.id
+										: item.variant,
+							},
+							type === "plus" ? step : -step,
+						);
 					}
 				}}
 			>

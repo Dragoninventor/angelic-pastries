@@ -63,8 +63,10 @@ export const AddToCart = ({
 		(event: SyntheticEvent<HTMLButtonElement>) => {
 			event.preventDefault();
 
-			// const defaultQuantity = product.quantities.
-			const quantityToAdd = quantity && quantity > 0 ? quantity : 1;
+			const quantityToAdd =
+				quantity && quantity > 0
+					? quantity
+					: (product.quantities?.quantityMinimum ?? 1);
 
 			// Check limit
 			const currentItemInCart = cart?.items?.find((item) => {

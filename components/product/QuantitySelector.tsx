@@ -22,14 +22,18 @@ export function QuantitySelector({
 	setQuantity,
 	onValidityChange,
 }: Props) {
-	const options = product.quantities.quantityOptions;
-	const minimumQuantity = product.quantities.quantityMinimum;
-	const maximumQuantity = product.quantities.quantityMaximum;
+	const {
+		quantityOptions: options,
+		quantityMinimum: minimumQuantity,
+		quantityMaximum: maximumQuantity,
+		quantitySet = 1,
+		enableCustomQuantities,
+	} = product.quantities;
 	const [customSelected, setCustomSelected] = useState(
-		!options.includes(quantity),
+		enableCustomQuantities && !options.includes(quantity),
 	);
 	const [inputString, setInputString] = useState(
-		customSelected ? "" : String(quantity ?? options[0]),
+		customSelected ? String(quantity) : "",
 	);
 	const [hasError, setHasError] = useState(false);
 	const customInputRef = useRef<HTMLInputElement | null>(null);
@@ -64,7 +68,10 @@ export function QuantitySelector({
 			setQuantity(number);
 		}
 
-		setHasError(customSelected && !valid);
+		if (customSelected) {
+			setHasError(!valid);
+		}
+
 		onValidityChange?.(valid);
 	};
 
@@ -72,7 +79,7 @@ export function QuantitySelector({
 		<div className="flex flex-col gap-3">
 			<dt className="text-sm">Quantity</dt>
 			<dd className="flex flex-col gap-2.5">
-				{options.length > 0 && (
+				{(options.length > 0 || enableCustomQuantities) && (
 					<div className="flex flex-wrap gap-1">
 						{options.map((option) => {
 							const isActive =
@@ -94,23 +101,25 @@ export function QuantitySelector({
 								</Button>
 							);
 						})}
-						<Button
-							size={"sm"}
-							variant={
-								customSelected
-									? "secondary"
-									: "secondary-outline"
-							}
-							onClick={() => {
-								setCustomSelected(true);
-								setInputString("");
-								setHasError(false);
-								onValidityChange?.(false);
-							}}
-							title={"Custom"}
-						>
-							Custom
-						</Button>
+						{enableCustomQuantities && (
+							<Button
+								size={"sm"}
+								variant={
+									customSelected
+										? "secondary"
+										: "secondary-outline"
+								}
+								onClick={() => {
+									setCustomSelected(true);
+									setInputString("");
+									setHasError(false);
+									onValidityChange?.(false);
+								}}
+								title={"Custom"}
+							>
+								Custom
+							</Button>
+						)}
 					</div>
 				)}
 				{customSelected && (
@@ -119,8 +128,8 @@ export function QuantitySelector({
 							id={"quantity-helper"}
 							className={"text-sm text-gray-700"}
 						>
-							Enter a custom quantity between {minimumQuantity}{" "}
-							and {maximumQuantity}.
+							Enter a quantity between {minimumQuantity} and{" "}
+							{maximumQuantity}.
 						</p>
 						<input
 							aria-label={"Custom quantity"}
@@ -130,6 +139,7 @@ export function QuantitySelector({
 							type={"number"}
 							min={minimumQuantity}
 							max={maximumQuantity}
+							step={quantitySet || 1}
 							value={inputString}
 							onChange={onInputChange}
 							ref={customInputRef}
