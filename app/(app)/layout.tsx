@@ -41,11 +41,12 @@ export default function RootLayout({
 					strategy={"afterInteractive"}
 				/>
 				<Script id={"gtag"} strategy={"afterInteractive"}>
-					{`window.dataLayer = window.dataLayer || [];
-					function gtag(){dataLayer.push(arguments);}
-					gtag('js', new Date());
-					gtag('config', 'AW-18311865890');
-				`}
+					{`
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+						gtag('config', 'AW-18311865890');
+					`}
 				</Script>
 			</body>
 		</html>

@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { CopyOrderLink } from "@/components/order/CopyOrderLink";
+import { GoogleAdsConversion } from "@/components/order/GoogleAdsConversion";
 
 export const dynamic = "force-dynamic";
 
@@ -113,6 +114,13 @@ const Order = async ({ params, searchParams }: PageProps) => {
 
 	return (
 		<div className={""}>
+			{order.amount && (
+				<GoogleAdsConversion
+					orderId={order.id}
+					amount={order.amount}
+					currency={order.currency}
+				/>
+			)}
 			<div
 				className={
 					"mb-2.5 flex w-full flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between"
